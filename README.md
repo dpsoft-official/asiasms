@@ -12,14 +12,14 @@ If you need integration your website(send and received SMS) with Asiasms, you ar
 <li> For use the allowed IP must define in asiasms panel</li>
 </ul>
 
-#Installation
+# Installation
 ``` bash
 $ composer require dpsoft/asiasms
 ```
 
-#Methods
+# Methods
 
-####GetCredit
+#### GetCredit
 Get credit of Asiasms panel.
 ```php
 <?php use Dpsoft\Asiasms\Asiasms;
@@ -32,7 +32,7 @@ try{
 }
 ```
 
-####bulkSend
+#### bulkSend
 Send message to list of mobiles
 ```php
 <?php use Dpsoft\Asiasms\Asiasms;
@@ -57,7 +57,7 @@ try{
 }
 ```
 
-####Send
+#### Send
 Send message to one mobile number.
 ```php
 <?php use Dpsoft\Asiasms\Asiasms;
@@ -80,7 +80,7 @@ try{
     echo $exception->getMessage();
 }
 ```
-####GetMessage
+#### GetMessage
 Get list of sms received to panel
 ```php
 <?php use Dpsoft\Asiasms\Asiasms;
