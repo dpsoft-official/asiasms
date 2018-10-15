@@ -162,11 +162,42 @@ class Asiasms
             'Receiver' => $receiver,
         ];
 
-        $body = $this->request('/Receive/GetMessage', $data);
+        $body = $this->request('Receive/GetMessage', $data);
 
-        $response = json_encode(simplexml_load_string($body));
+        $response = json_decode($body, true);
 
-        $response = json_decode($response, true);
+        if ($response['IsSuccessful'] == 1 and $response['StatusCode'] == 0) {
+            return $response['ReceivedMessages'];
+        } else {
+            throw new AsiasmsException($response['StatusCode'] ?? 13);
+        }
+    }
+
+    /**
+     * Get messages between two dates
+     *
+     * @param string $startDate
+     * @param string $endDate
+     * @param string $receiver
+     * @return mixed
+     * @throws AsiasmsException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getMessagesBetweenDate(string $startDate, string $endDate, string $receiver = '')
+    {
+        v::stringType()->length(6, 10)->assert($startDate);
+        v::stringType()->length(6, 10)->assert($endDate);
+        v::stringType()->assert($receiver);
+
+        $data = [
+            'BeginDate' => $startDate,
+            'EndDate' => $endDate,
+            'Receiver' => $receiver,
+        ];
+
+        $body = $this->request('Receive/GetReceivedMessages', $data);
+
+        $response = json_decode($body, true);
 
         if ($response['IsSuccessful'] == 1 and $response['StatusCode'] == 0) {
             return $response['ReceivedMessages'];
@@ -203,5 +234,4 @@ class Asiasms
     {
         $this->client = $client;
     }
-
 }

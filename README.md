@@ -81,7 +81,7 @@ try{
 }
 ```
 ####GetMessage
-Get list of sms received to panel
+Get list of sms received to panel in date (messages just return one time. the limitation from Asiasms)
 ```php
 <?php use Dpsoft\Asiasms\Asiasms;
 
@@ -92,10 +92,40 @@ try{
       */
     $asiasms = new Asiasms('username', 'password');
     /**
-      *@param string $Date date for get report in 20150811 format | required
-      *@param string $receiver panel number | optional
+      *@param string date, date for get report in 20150811 format | required
+      *@param string receiver, panel number | optional
+      *
+      *return array of messages
       */
-    $batchId = $asiasms->getMessages('$Date', 'receiver');
+    $messages = $asiasms->getMessages('date', 'receiver');
+    
+    print_r($messages);
+}catch (\Throwable $exception){
+    echo $exception->getMessage();
+}
+```
+
+####Get messages between two date
+Get list of sms received to panel between two dates (range of dates)
+```php
+<?php use Dpsoft\Asiasms\Asiasms;
+
+try{
+    /**
+      *@param string username Asiasms panel username required
+      *@param string password Webservice password set in Asiasms panel. required
+      */
+    $asiasms = new Asiasms('username', 'password');
+    /**
+      *@param string start date, in 2018-08-11 format | required
+      *@param string end date, in 2018-08-11 format | required
+      *@param string receiver, panel number | optional
+      *
+      *return array of messages
+      */
+    $messages = $asiasms->getMessagesBetweenDate('start date', 'end date');
+    
+    print_r($messages);
 }catch (\Throwable $exception){
     echo $exception->getMessage();
 }

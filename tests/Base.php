@@ -9,6 +9,7 @@
 namespace Tests;
 
 
+use function Couchbase\defaultDecoder;
 use DOMDocument;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -59,23 +60,21 @@ class Base extends TestCase
 
     public function getMessagesMock()
     {
+        $sms = [];
         for ($i = 0; $i < 5; $i++) {
             $sms[$i] = new \stdClass();
             $sms[$i]->From = '989131111111';
             $sms[$i]->To = '50000000';
             $sms[$i]->Text = 'test message';
-            $sms[$i]->ReceiveDateTime = '2018-08-18 10:51:00';
+            $sms[$i]->ReceiveDateTime = '2018-10-14T18:10:40';
         }
 
-        $responseArray = ['IsSuccessful' => true, 'StatusCode' => 0, 'ReceivedMessages' => 'From'];
-
-        $xml = new SimpleXMLElement('<ResponseMessage/>');
-        array_walk_recursive($responseArray, array ($xml, 'addChild'));
+        $responseArray = ['ReceivedMessages' => $sms, 'IsSuccessful' => 1, 'StatusCode' => 0, 'Message' => '', 'StackTrace' => ''];
 
         $mock = new MockHandler(
             [
                 new Response(
-                    200, [],$xml->asXML()
+                    200, [],json_encode($responseArray)
 
                 ), new RequestException(
                 "Error Communicating with Server",
