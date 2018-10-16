@@ -50,9 +50,9 @@ class Asiasms
     /**
      * Initialize Request for send to Asiasms
      *
-     * @param $url
-     * @param array $data
-     * @param string $method
+     * @param $url (required)
+     * @param array $data (required)
+     * @param string $method = 'post' (optional)
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -74,12 +74,12 @@ class Asiasms
      *
      * mobile number should be in 09xxxxxxx format
      *
-     * @param $smsText
-     * @param $receiver
-     * @param $senderId
-     * @param $udh
-     * @param $isFlash
-     * @return string BatchId
+     * @param $smsText(required)
+     * @param $receiver (required)
+     * @param $senderId = null (optional)
+     * @param $udh = null (optional)
+     * @param $isFlash = null (optional)
+     * @return string BatchId = null (optional)
      * @throws AsiasmsException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -93,11 +93,11 @@ class Asiasms
      *
      * mobile number should be in 09xxxxxxx format
      *
-     * @param string $smsText
-     * @param array $receivers
-     * @param string $senderId
-     * @param string $udh
-     * @param bool $isFlash
+     * @param string $smsText (required)
+     * @param array $receivers (required)
+     * @param string $senderId = null (optional)
+     * @param string $udh = null (optional)
+     * @param bool $isFlash = null (optional)
      * @return mixed
      * @throws AsiasmsException
      * @throws ValidationException
@@ -145,8 +145,8 @@ class Asiasms
     /**
      * Get messages in panel
      *
-     * @param string $date
-     * @param string $receiver
+     * @param string $date (required)
+     * @param string $receiver = '' (optional)
      * @return mixed
      * @throws AsiasmsException
      * @throws ValidationException
@@ -176,9 +176,9 @@ class Asiasms
     /**
      * Get messages between two dates
      *
-     * @param string $startDate
-     * @param string $endDate
-     * @param string $receiver
+     * @param string $startDate (required)
+     * @param string $endDate (required)
+     * @param string $receiver = '' (optional)
      * @return mixed
      * @throws AsiasmsException
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -226,7 +226,7 @@ class Asiasms
     }
 
     /**
-     * Just for test Guzzle http mock
+     * Just for test guzzle http mock
      *
      * @param Client $client
      */
