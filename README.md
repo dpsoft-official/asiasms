@@ -79,7 +79,7 @@ try{
     /**
       *@param string $message (required) message text
       *@param string $number (required) example: '09100000000' the receiver number
-      *@param string $senderId = null (optional) the number sms send with it(must exist in panel) default panel default number 
+      *@param string $senderId = null (optional) the number sms send with it(must exist in panel)
       *@param string $udh = null (optional)
       *@param bool $isFlash = null (optional) if send bool true or false the webservice not work
       */
@@ -103,7 +103,7 @@ try{
     $asiasms = new Asiasms($username, $password);
     
     /**
-      *@param string $date (required) date for get report in 20150811 format | required
+      *@param string $date (required) date for get report in any valid date format
       *@param string $receiver = '' (optional) panel number
       *
       *return array of messages
@@ -131,8 +131,8 @@ try{
     $asiasms = new Asiasms($username, $password);
     
     /**
-      *@param string $startDate (required) in 2018-08-11 format
-      *@param string $endDate (required) in 2018-08-11 format
+      *@param string $startDate (required) in any valid date format
+      *@param string $endDate (required) in any valid date format
       *@param string $receiver = '' (optional) panel number
       *
       *return array of messages
@@ -171,4 +171,4 @@ Array
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
-Copyright (c) 2018 dpsoft.ir
+Copyright (c) 2018 [dpsoft.ir](https://dpsoft.ir)
