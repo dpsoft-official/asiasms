@@ -29,8 +29,8 @@ class Asiasms
      */
     public function __construct(string $username, string $password)
     {
-        v::stringType()->assert($username);
-        v::stringType()->assert($password);
+        v::notEmpty()->assert($username);
+        v::notEmpty()->assert($password);
 
         $this->username = $username;
         $this->password = $password;
@@ -83,7 +83,7 @@ class Asiasms
      * @throws AsiasmsException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function send($smsText, $receiver, $senderId, $udh, $isFlash)
+    public function send($smsText, $receiver, $senderId = null, $udh = null, $isFlash = null)
     {
         return $this->bulkSend($smsText, [$receiver], $senderId, $udh, $isFlash);
     }
@@ -154,11 +154,11 @@ class Asiasms
      */
     public function getMessages(string $date, string $receiver = '')
     {
-        v::stringType()->length(6, 8)->assert($date);
+        v::date()->assert($date);
         v::stringType()->assert($receiver);
 
         $data = [
-            'Date' => $date,
+            'Date' => date('Ymd', strtotime($date)),
             'Receiver' => $receiver,
         ];
 
@@ -185,13 +185,13 @@ class Asiasms
      */
     public function getMessagesBetweenDate(string $startDate, string $endDate, string $receiver = '')
     {
-        v::stringType()->length(6, 10)->assert($startDate);
-        v::stringType()->length(6, 10)->assert($endDate);
+        v::date()->assert($startDate);
+        v::date()->assert($endDate);
         v::stringType()->assert($receiver);
 
         $data = [
-            'BeginDate' => $startDate,
-            'EndDate' => $endDate,
+            'BeginDate' => date('Y-m-d', strtotime($startDate)),
+            'EndDate' => date('Y-m-d', strtotime($endDate)),
             'Receiver' => $receiver,
         ];
 
